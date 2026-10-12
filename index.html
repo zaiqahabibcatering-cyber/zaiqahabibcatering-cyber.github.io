@@ -1,422 +1,192 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#17130f">
-  <title>Zaiqa Habib Catering | Social Media Studio</title>
-  <style>
-    :root {
-      --bg: #faf7f0;
-      --ink: #211a14;
-      --gold: #c89b48;
-      --green: #254b39;
-      --muted: #756d63;
-      --white: #fff;
-      --line: #e8dfd1;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.6;
-    }
-    a { color: inherit; text-decoration: none; }
-    button, input, textarea, select { font: inherit; }
-    button, .btn {
-      border: 0;
-      border-radius: 8px;
-      padding: 12px 18px;
-      background: var(--gold);
-      color: #211a14;
-      font-weight: bold;
-      cursor: pointer;
-      display: inline-block;
-    }
-    button:hover, .btn:hover { filter: brightness(.95); }
-    .topbar {
-      background: #17130f;
-      color: white;
-      padding: 14px 6%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-    .brand { font-size: 19px; font-weight: 800; }
-    .brand span { color: var(--gold); }
-    nav { display: flex; gap: 18px; flex-wrap: wrap; }
-    nav a { font-size: 14px; color: #f4eadb; }
-    nav a:hover { color: var(--gold); }
-    .hero {
-      min-height: 490px;
-      padding: 70px 7%;
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      align-items: center;
-      gap: 42px;
-      background: linear-gradient(120deg, #f6eddf, #fffaf2);
-    }
-    .eyebrow {
-      color: var(--green);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-weight: bold;
-      font-size: 12px;
-    }
-    h1 {
-      font-size: clamp(36px, 5vw, 60px);
-      line-height: 1.08;
-      margin: 14px 0;
-      letter-spacing: -1.5px;
-    }
-    h1 span { color: #a97728; }
-    .lead { color: var(--muted); max-width: 540px; }
-    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
-    .btn-dark { background: var(--green); color: white; }
-    .hero-art {
-      min-height: 330px;
-      border-radius: 24px;
-      background: linear-gradient(145deg, #344d35, #17251c);
-      color: white;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      text-align: center;
-      box-shadow: 0 20px 45px #3d2b191c;
-      overflow: hidden;
-    }
-    .food-emoji { font-size: clamp(80px, 12vw, 145px); line-height: 1.3; }
-    .hero-art h2 { color: #f3d18d; margin: 8px 0 0; }
-    section { padding: 64px 7%; scroll-margin-top: 18px; }
-    .section-head { max-width: 680px; margin-bottom: 28px; }
-    .section-head h2 { font-size: clamp(28px, 4vw, 40px); line-height: 1.2; margin: 8px 0; }
-    .muted { color: var(--muted); }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .card {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: 15px;
-      padding: 22px;
-    }
-    .card .emoji { font-size: 35px; }
-    .card h3 { margin: 8px 0; }
-    .dark-section { background: #1d211b; color: white; }
-    .dark-section .muted { color: #c6c6ba; }
-    .dark-section .eyebrow { color: #e4bf78; }
-    .menu-item {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      border-bottom: 1px solid #ffffff24;
-      padding: 14px 0;
-    }
-    .menu-item strong { color: #f0ca81; }
-    .studio { background: #f0e8dc; }
-    .studio-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-bottom: 18px;
-    }
-    .stat {
-      background: white;
-      border: 1px solid var(--line);
-      padding: 18px;
-      border-radius: 12px;
-    }
-    .stat strong { display: block; font-size: 25px; }
-    .stat small { color: var(--muted); }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 6px; }
-    input, textarea, select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #d8cebf;
-      border-radius: 8px;
-      background: #fff;
-      color: var(--ink);
-    }
-    textarea { min-height: 100px; resize: vertical; }
-    .field { margin-bottom: 14px; }
-    .wide { grid-column: 1 / -1; }
-    .result {
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-      background: #f8f4eb;
-      border: 1px dashed #d5c5a8;
-      border-radius: 10px;
-      padding: 15px;
-      min-height: 65px;
-      margin-top: 14px;
-    }
-    .notice {
-      background: #fff5dc;
-      border-left: 4px solid #c89b48;
-      border-radius: 6px;
-      padding: 13px;
-      font-size: 14px;
-    }
-    .status { font-size: 13px; color: var(--green); margin-top: 8px; }
-    .footer {
-      background: #17130f;
-      color: white;
-      padding: 28px 7%;
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    @media (max-width: 760px) {
-      .hero { grid-template-columns: 1fr; padding-top: 48px; }
-      .hero-art { min-height: 250px; }
-      .grid { grid-template-columns: 1fr; }
-      .stats { grid-template-columns: 1fr; }
-      .form-grid { grid-template-columns: 1fr; }
-      .wide { grid-column: auto; }
-      nav { gap: 12px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d3326">
+<title>Zaiqa Habib Catering | Social Media Studio</title>
+<style>
+:root{--green:#103b2d;--deep:#08271d;--gold:#d8a63f;--cream:#f8f0df;--paper:#fffaf0;--ink:#17352b;--muted:#68786e;--line:#e8dac0;--shadow:0 14px 28px #53380e20, inset 0 1px 0 #ffffffd9}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(135deg,#eee0c5,#fff9ef 48%,#e8dcc4);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 4%;background:linear-gradient(110deg,#08271d,#164b36);color:#fff;box-shadow:0 8px 24px #142b1c40;border-bottom:1px solid #ffffff30}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:1px;font-size:20px}.brand-mark{font-size:31px;color:#f2bd4f;text-shadow:0 3px 0 #8d5e13}.brand span{color:#e6b44d}.top-title{font-size:17px;font-weight:700}.top-actions{display:flex;align-items:center;gap:10px}.mode{border:1px solid #6e9a7b;border-radius:30px;padding:9px 14px;background:#0b2e22;color:white}.dot{color:#70e6a0}
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:calc(100vh - 70px)}
+.sidebar{background:linear-gradient(180deg,#0b3426,#06251b);padding:22px 14px;color:white;display:flex;flex-direction:column;gap:8px;box-shadow:8px 0 24px #17331d20}
+.navbtn{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:14px 15px;border:1px solid transparent;border-radius:14px;color:#f8f4e9;background:transparent;font-weight:600;transition:.2s}
+.navbtn:hover,.navbtn.active{background:linear-gradient(110deg,#dba83d,#f2cf76);color:#153529;box-shadow:0 5px 0 #96661d,0 9px 16px #0003;transform:translateY(-1px)}
+.nav-icon{font-size:21px;width:25px;text-align:center}.side-note{margin-top:auto;padding:25px 8px 10px;color:#edbd4f;font-family:cursive;font-size:23px;line-height:1.3;transform:rotate(-5deg)}
+main{padding:28px;min-width:0;max-width:1600px;width:100%;margin:auto}
+.hero{position:relative;overflow:hidden;display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:center;padding:32px;border:1px solid #fff;border-radius:25px;background:linear-gradient(115deg,#fff8e9,#f0dfbd);box-shadow:var(--shadow);min-height:265px}
+.eyebrow{font-size:12px;letter-spacing:2.5px;font-weight:800;color:#a16c12;text-transform:uppercase}.hero h1{font-size:clamp(30px,3.3vw,48px);line-height:1.05;margin:13px 0;color:#103729}.hero h1 span{color:#b27b20}.hero p{line-height:1.65;color:#617168;max-width:570px}
+.hero-art{min-height:190px;display:flex;align-items:center;justify-content:center;position:relative;border-radius:22px;background:radial-gradient(circle at 50% 20%,#426a48,#173b2b 70%);box-shadow:inset 0 3px 9px #fff2,0 15px 22px #34261120;color:#f3c25d}
+.food-bowl{font-size:clamp(65px,8vw,110px);filter:drop-shadow(0 12px 7px #0005);transform:rotate(-5deg)}.food-side{font-size:clamp(35px,4vw,54px);position:absolute;right:13%;top:17%;filter:drop-shadow(0 8px 5px #0004)}.art-caption{position:absolute;bottom:22px;color:#ffda8a;font-weight:800;font-size:19px;letter-spacing:.5px}
+.action-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:22px 0}
+.action-card{display:flex;align-items:center;gap:15px;padding:19px;border-radius:18px;border:1px solid white;background:linear-gradient(145deg,#fffdf6,#f0e3ca);box-shadow:var(--shadow);text-align:left;color:var(--ink);transition:.2s}
+.action-card:hover{transform:translateY(-3px);box-shadow:0 18px 25px #49331325}.action-icon{display:grid;place-items:center;flex-shrink:0;width:54px;height:54px;border-radius:17px;background:linear-gradient(145deg,#1e6347,#0a3425);color:#fff4d5;font-size:27px;box-shadow:0 5px 0 #062619,0 8px 12px #0002}.action-card:nth-child(2) .action-icon{background:linear-gradient(145deg,#f7d67b,#bd841f);color:#fff}.action-card h3{margin:0 0 6px;font-size:18px}.action-card p{margin:0;font-size:13px;color:var(--muted)}
+.content-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,.9fr);gap:20px;align-items:start}
+.panel{border:1px solid #fff;border-radius:22px;background:linear-gradient(145deg,#fffdf7,#f6ecd9);box-shadow:var(--shadow);padding:22px;margin-bottom:18px;min-width:0}
+.panel-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:17px}.panel-heading h2{margin:0;font-size:21px}.panel-heading small{color:var(--muted)}
+.platforms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:10px 0 20px}
+.platform{padding:12px 8px;border-radius:13px;border:1px solid var(--line);background:#fffaf0;color:var(--ink);font-weight:700;box-shadow:0 4px 8px #523a1110}
+.platform.selected{background:linear-gradient(135deg,#174d38,#082b1f);color:white;border-color:#174d38;box-shadow:0 5px 0 #08271d}
+.platform span{font-size:19px;display:block;margin-bottom:5px}
+.upload-box{border:1.5px dashed #d4ae66;border-radius:17px;padding:23px 14px;text-align:center;background:linear-gradient(135deg,#fff8e8,#f5e8cf)}
+.clapper{font-size:48px;filter:drop-shadow(0 5px 3px #0002)}.upload-box h3{margin:9px 0 6px}.upload-box p{font-size:13px;color:var(--muted);margin:0 0 15px}
+.btn{border:0;border-radius:11px;padding:12px 17px;font-weight:800;box-shadow:0 4px 0 #0002;transition:.15s}.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #0002}.btn-green{background:linear-gradient(120deg,#205b42,#0d3828);color:white}.btn-gold{background:linear-gradient(120deg,#eac66e,#c48d2b);color:#1c2d22}.btn-light{background:#fff7e8;border:1px solid var(--line);color:var(--ink)}
+.file-name{display:block;margin-top:9px;font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.field{margin:14px 0}.field label{display:block;font-weight:700;font-size:13px;margin-bottom:8px}.field input,.field select,.field textarea{width:100%;border:1px solid #d9c9ad;border-radius:10px;background:#fffdf8;padding:12px;color:#19372b;outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:#c89632;box-shadow:0 0 0 3px #e8bf5b35}.field textarea{min-height:85px;resize:vertical}
+.draft-output{margin-top:16px;padding:17px;border:1px dashed #d3b77c;border-radius:14px;background:#fbf4e7;line-height:1.6;overflow-wrap:anywhere;white-space:pre-wrap}.draft-output:empty:before{content:"Your caption and hashtags will appear here after you create a draft.";color:#7b8178}
+.button-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.status{font-size:13px;line-height:1.5;margin-top:12px;color:#174d38}
+.draft-row{display:grid;grid-template-columns:43px minmax(0,1fr) auto;gap:11px;align-items:center;padding:13px 0;border-bottom:1px solid #e8ddca}.draft-row:last-child{border-bottom:0}.draft-thumb{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:linear-gradient(145deg,#245b42,#0c3022);font-size:22px;color:white}.draft-row strong{display:block;font-size:13px;margin-bottom:5px}.draft-row small{color:var(--muted);font-size:12px}.pill{border-radius:20px;padding:7px 10px;background:#f4dfab;color:#79520d;font-size:11px;font-weight:800;white-space:nowrap}.pill.approved{background:#d8eed9;color:#1c6638}
+.approval{background:linear-gradient(135deg,#fff6df,#f2dfb8);border-color:#f2cf7b}.approval h3{margin:0 0 8px}.approval p{font-size:13px;line-height:1.6;color:#6b6049}.approval-strip{background:#f2dca6;border-radius:9px;padding:10px;font-size:12px;font-weight:700}
+.overview-row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid #e8ddca}.overview-row:last-child{border:0}.platform-name{display:flex;align-items:center;gap:9px;font-weight:700;font-size:13px}.platform-name span{font-size:20px}
+.section{scroll-margin-top:95px}.hidden{display:none!important}.notice{padding:12px 14px;background:#fff1ce;border-left:4px solid #d2a03a;border-radius:8px;font-size:13px;line-height:1.5;margin-bottom:16px}
+footer{text-align:center;padding:22px 0 8px;color:#7c796b;font-size:11px;letter-spacing:2px}
+@media(max-width:1000px){.layout{grid-template-columns:190px minmax(0,1fr)}main{padding:20px}.content-grid{grid-template-columns:1fr}.hero{padding:24px}.platforms{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.topbar{padding:12px 14px;flex-wrap:wrap}.top-title{display:none}.brand{font-size:17px}.layout{grid-template-columns:1fr}.sidebar{position:static;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;padding:9px}.navbtn{justify-content:center;flex-direction:column;gap:4px;padding:9px 3px;font-size:10px;text-align:center}.nav-icon{font-size:19px}.side-note{display:none}main{padding:13px}.hero{grid-template-columns:1fr;padding:22px;gap:17px}.hero-art{min-height:170px}.action-grid{gap:8px}.action-card{flex-direction:column;align-items:flex-start;padding:12px;gap:9px}.action-icon{width:42px;height:42px;font-size:22px}.action-card h3{font-size:15px}.action-card p{font-size:11px}.panel{padding:16px}.platforms{gap:7px}.platform{font-size:12px}.content-grid{gap:4px}.mode{font-size:12px;padding:8px}.panel-heading h2{font-size:18px}}
+</style>
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#home">ZAIQA <span>HABIB</span></a>
-    <nav aria-label="Main navigation">
-      <a href="#home">Home</a>
-      <a href="#services">Services</a>
-      <a href="#menu">Menu</a>
-      <a href="#studio">Social Studio</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hero" id="home">
-      <div>
-        <div class="eyebrow">Taste • Tradition • Celebration</div>
-        <h1>Make every event <span>delicious.</span></h1>
-        <p class="lead">Memorable catering for weddings, family gatherings and special occasions. Discover the taste of Zaiqa Habib.</p>
-        <div class="actions">
-          <a class="btn btn-dark" href="#contact">Plan Your Event</a>
-          <a class="btn" href="#menu">Explore Menu</a>
-        </div>
-      </div>
-      <div class="hero-art" role="img" aria-label="Decorative food illustration">
-        <div>
-          <div class="food-emoji">🍛 🍢</div>
-          <h2>Made with love</h2>
-          <p>Good food. Beautiful moments.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="services">
-      <div class="section-head">
-        <div class="eyebrow">What we do</div>
-        <h2>Catering for your special moments</h2>
-        <p class="muted">Flexible options for intimate gatherings and large celebrations. Contact us to discuss your requirements.</p>
-      </div>
-      <div class="grid">
-        <article class="card">
-          <div class="emoji">💍</div>
-          <h3>Wedding Events</h3>
-          <p class="muted">Plan a memorable celebration with a menu made for your guests.</p>
-        </article>
-        <article class="card">
-          <div class="emoji">🎉</div>
-          <h3>Parties & Gatherings</h3>
-          <p class="muted">Food options for birthdays, family events and get-togethers.</p>
-        </article>
-        <article class="card">
-          <div class="emoji">🍽️</div>
-          <h3>Custom Menus</h3>
-          <p class="muted">Discuss dishes, serving sizes and event needs with our team.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="dark-section" id="menu">
-      <div class="section-head">
-        <div class="eyebrow">A taste to remember</div>
-        <h2>Popular menu ideas</h2>
-        <p class="muted">Sample menu only. Confirm availability and prices with us before booking.</p>
-      </div>
-      <div class="grid">
-        <article class="card">
-          <div class="emoji">🍚</div>
-          <h3>Biryani & Rice</h3>
-          <p class="muted">Aromatic rice dishes for a satisfying main course.</p>
-        </article>
-        <article class="card">
-          <div class="emoji">🍗</div>
-          <h3>BBQ & Karahi</h3>
-          <p class="muted">Classic favourites for your special gathering.</p>
-        </article>
-        <article class="card">
-          <div class="emoji">🍮</div>
-          <h3>Desserts</h3>
-          <p class="muted">Sweet finishes to complete your menu.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="studio" id="studio">
-      <div class="studio-top">
-        <div class="section-head">
-          <div class="eyebrow">Your content workspace</div>
-          <h2>Social Media Studio</h2>
-          <p class="muted">Prepare post ideas, captions and hashtags for your business.</p>
-        </div>
-        <span class="btn btn-dark">TikTok + YouTube planner</span>
-      </div>
-
-      <div class="stats">
-        <div class="stat"><strong>01</strong><small>Prepare content</small></div>
-        <div class="stat"><strong>02</strong><small>Review your draft</small></div>
-        <div class="stat"><strong>03</strong><small>You approve before publishing</small></div>
-      </div>
-
-      <div class="card">
-        <div class="notice">Safety first: this sample tool does not upload or publish anything. It only creates a draft in this page. Any real platform integration must be configured separately.</div>
-        <div class="form-grid" style="margin-top:20px">
-          <div class="field">
-            <label for="platform">Platform</label>
-            <select id="platform">
-              <option value="TikTok">TikTok</option>
-              <option value="YouTube Shorts">YouTube Shorts</option>
-              <option value="YouTube">YouTube</option>
-              <option value="Instagram">Instagram</option>
-              <option value="Facebook">Facebook</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="topic">Video or post topic</label>
-            <input id="topic" placeholder="e.g. Chicken biryani preparation">
-          </div>
-          <div class="field wide">
-            <label for="details">Details (optional)</label>
-            <textarea id="details" placeholder="Describe the dish, event, special offer or video..."></textarea>
-          </div>
-        </div>
-        <button type="button" id="generate">Create content draft</button>
-        <div id="draft" class="result" aria-live="polite">Your caption and hashtags will appear here.</div>
-        <div class="actions">
-          <button type="button" id="copyDraft" class="btn-dark">Copy draft</button>
-          <button type="button" id="approve">Mark draft approved</button>
-        </div>
-        <p id="status" class="status" aria-live="polite">Status: Not yet prepared. Nothing has been published.</p>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="section-head">
-        <div class="eyebrow">Let's plan together</div>
-        <h2>Contact Zaiqa Habib Catering</h2>
-        <p class="muted">Fill out this sample enquiry form. It will prepare a message for you to copy; it will not send anything automatically.</p>
-      </div>
-      <div class="card">
-        <div class="form-grid">
-          <div class="field">
-            <label for="customer">Your name</label>
-            <input id="customer" placeholder="Your name">
-          </div>
-          <div class="field">
-            <label for="event">Event type</label>
-            <select id="event">
-              <option>Wedding</option>
-              <option>Birthday</option>
-              <option>Family gathering</option>
-              <option>Corporate event</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="field wide">
-            <label for="message">Event details</label>
-            <textarea id="message" placeholder="Date, guest count and menu requirements"></textarea>
-          </div>
-        </div>
-        <button type="button" id="enquiry">Prepare enquiry</button>
-        <div class="result" id="enquiryResult" aria-live="polite">Your enquiry will appear here.</div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <strong>Zaiqa Habib Catering</strong>
-    <span>Made for memorable moments.</span>
-  </footer>
-
-  <script>
-    const topic = document.getElementById("topic");
-    const details = document.getElementById("details");
-    const platform = document.getElementById("platform");
-    const draft = document.getElementById("draft");
-    const status = document.getElementById("status");
-    let currentDraft = "";
-
-    document.getElementById("generate").addEventListener("click", () => {
-      const subject = topic.value.trim();
-      if (!subject) {
-        draft.textContent = "Please enter a video or post topic first.";
-        topic.focus();
-        return;
-      }
-      const extra = details.value.trim();
-      const caption = "Discover the taste of Zaiqa Habib! " + subject +
-        (extra ? " — " + extra : "") +
-        ". Follow for more delicious food and catering ideas.";
-      const tags = "#ZaiqaHabib #Catering #FoodLovers #PakistaniFood #Foodie";
-      currentDraft = "Platform: " + platform.value + "\n\nCaption:\n" +
-        caption + "\n\nHashtags:\n" + tags;
-      draft.textContent = currentDraft;
-      status.textContent = "Status: Draft prepared. Not published.";
-    });
-
-    document.getElementById("copyDraft").addEventListener("click", async () => {
-      if (!currentDraft) {
-        status.textContent = "Create a draft first.";
-        return;
-      }
-      try {
-        await navigator.clipboard.writeText(currentDraft);
-        status.textContent = "Draft copied. Nothing has been published.";
-      } catch (error) {
-        status.textContent = "Select and copy the draft text manually.";
-      }
-    });
-
-    document.getElementById("approve").addEventListener("click", () => {
-      if (!currentDraft) {
-        status.textContent = "Create a draft first. No draft is approved.";
-        return;
-      }
-      status.textContent = "Status: You marked this draft approved. It is still NOT uploaded or published.";
-    });
-
-    document.getElementById("enquiry").addEventListener("click", () => {
-      const name = document.getElementById("customer").value.trim();
-      const eventType = document.getElementById("event").value;
-      const message = document.getElementById("message").value.trim();
-      document.getElementById("enquiryResult").textContent =
-        "Catering enquiry\nName: " + (name || "Not provided") +
-        "\nEvent: " + eventType +
-        "\nDetails: " + (message || "Not provided") +
-        "\n\nPlease add your real business contact details before using this message.";
-    });
-  </script>
+<header class="topbar">
+  <div class="brand"><div class="brand-mark">♨</div><div>ZAIQA <span>HABIB</span><div style="font-size:9px;letter-spacing:4px;text-align:center;margin-top:3px">CATERING</div></div></div>
+  <div class="top-title">✦ Social Media Studio <span style="font-size:12px;font-weight:400;display:block;margin-top:4px">Create · Review · Approve</span></div>
+  <div class="top-actions"><div class="mode"><span class="dot">●</span> Draft Mode</div></div>
+</header>
+<div class="layout">
+<aside class="sidebar">
+  <button class="navbtn active" data-target="dashboard"><span class="nav-icon">⌂</span>Dashboard</button>
+  <button class="navbtn" data-target="create"><span class="nav-icon">✎</span>Create Post</button>
+  <button class="navbtn" data-target="library"><span class="nav-icon">▶</span>Video Library</button>
+  <button class="navbtn" data-target="drafts"><span class="nav-icon">▤</span>My Drafts</button>
+  <button class="navbtn" data-target="approval"><span class="nav-icon">✓</span>Approval</button>
+  <button class="navbtn" data-target="analytics"><span class="nav-icon">▥</span>Overview</button>
+  <button class="navbtn" data-target="settings"><span class="nav-icon">⚙</span>Settings</button>
+  <div class="side-note">Good Food<br>Beautiful Moments ♡</div>
+</aside>
+<main>
+<section id="dashboard" class="section">
+  <div class="hero">
+    <div><div class="eyebrow">Your content workspace</div><h1>Manage your<br>social media <span>beautifully.</span></h1><p>Create post ideas, review captions and approve every draft before anything is published.</p><button class="btn btn-green" onclick="goTo('create')">Let's Create&nbsp; →</button></div>
+    <div class="hero-art"><div class="food-bowl">🍛</div><div class="food-side">🌿</div><div class="art-caption">Made with love</div></div>
+  </div>
+  <div class="action-grid">
+    <button class="action-card" onclick="goTo('create')"><div class="action-icon">▤</div><div><h3>Create</h3><p>Content drafts & captions</p></div></button>
+    <button class="action-card" onclick="goTo('drafts')"><div class="action-icon">▦</div><div><h3>Plan</h3><p>Organize post ideas</p></div></button>
+    <button class="action-card" onclick="goTo('approval')"><div class="action-icon">✓</div><div><h3>Approve</h3><p>Your permission first</p></div></button>
+  </div>
+</section>
+<div class="content-grid">
+<div>
+<section id="create" class="panel section">
+  <div class="panel-heading"><h2>✚ Create a New Post</h2><small>Draft only</small></div>
+  <div class="notice"><strong>Safety first:</strong> this website demo creates captions and saves drafts only. It does not upload or publish anything to social platforms.</div>
+  <div class="field"><label>Choose platform</label></div>
+  <div class="platforms" role="group" aria-label="Choose platform">
+    <button class="platform selected" data-platform="TikTok"><span>♪</span>TikTok</button>
+    <button class="platform" data-platform="YouTube"><span>▶️</span>YouTube</button>
+    <button class="platform" data-platform="Instagram"><span>📸</span>Instagram</button>
+    <button class="platform" data-platform="Facebook"><span>f</span>Facebook</button>
+  </div>
+  <div class="field"><label for="topic">Video or post topic</label><input id="topic" placeholder="e.g. Chicken biryani catering"></div>
+  <div class="field"><label for="details">Details (optional)</label><textarea id="details" placeholder="Describe the dish, event, special offer or video..."></textarea></div>
+  <section id="library" class="upload-box section">
+    <div class="clapper">🎬</div><h3>Add your video (optional)</h3><p>Choose a video from your computer; it stays in your browser session and is not uploaded anywhere by this demo.</p>
+    <input id="videoFile" type="file" accept="video/mp4,video/quicktime,video/webm" class="hidden">
+    <button class="btn btn-green" onclick="document.getElementById('videoFile').click()">▣ Select Video</button><span class="file-name" id="fileName">No video selected</span>
+  </section>
+  <div class="button-row"><button class="btn btn-gold" id="createDraft">✦ Create Content Draft</button></div>
+  <div class="draft-output" id="draftOutput" aria-live="polite"></div>
+  <div class="button-row"><button class="btn btn-green" id="copyDraft">Copy Draft</button><button class="btn btn-gold" id="approveDraft">Mark Draft Approved</button><button class="btn btn-light" id="saveDraft">Save Draft</button></div>
+  <div class="status" id="status" aria-live="polite">Status: Create a draft to begin. Nothing is published automatically.</div>
+</section>
+<section id="drafts" class="panel section">
+  <div class="panel-heading"><h2>▤ Recent Drafts</h2><button class="btn btn-light" id="viewAll">View All</button></div>
+  <div id="draftList"><div class="draft-row"><div class="draft-thumb">🍛</div><div><strong>Chicken Biryani Catering</strong><small>Sample idea · not published</small></div><span class="pill">Example</span></div></div>
+</section>
+<section id="settings" class="panel section">
+  <div class="panel-heading"><h2>⚙ Studio Settings</h2></div>
+  <p style="color:var(--muted);font-size:14px;line-height:1.6">This starter website is a front-end demo. Platform connections, secure sign-in and real publishing are not configured.</p>
+  <div class="notice">Your approval rule: no post should be uploaded or published without your separate, explicit confirmation.</div>
+</section>
+</div>
+<div>
+<section id="approval" class="panel approval section">
+  <div class="panel-heading"><h2>🛡 Approval Required</h2></div>
+  <p>Nothing will be published to any platform by this demo. Marking a draft approved only changes its local status; it does not upload it.</p>
+  <div class="approval-strip">✓ You're in control, always.</div>
+  <div class="status" id="approvalStatus">No draft approved yet.</div>
+</section>
+<section id="analytics" class="panel section">
+  <div class="panel-heading"><h2>▥ Platform Overview</h2></div>
+  <div class="overview-row"><div class="platform-name"><span>♪</span>TikTok</div><small>Draft workspace</small></div>
+  <div class="overview-row"><div class="platform-name"><span>▶️</span>YouTube</div><small>Draft workspace</small></div>
+  <div class="overview-row"><div class="platform-name"><span>📸</span>Instagram</div><small>Draft workspace</small></div>
+  <div class="overview-row"><div class="platform-name"><span>f</span>Facebook</div><small>Draft workspace</small></div>
+</section>
+<div class="panel" style="background:linear-gradient(145deg,#174b36,#08291e);color:#fff">
+  <div style="font-size:34px;color:#e8b64d">📣</div><h3 style="margin:8px 0">Great food brings people together.</h3><p style="font-size:13px;line-height:1.6;color:#e0eadf">Let's create something delicious for your audience.</p>
+</div>
+</div>
+</div>
+<footer>ZAiQA HABIB CATERING &nbsp; • &nbsp; SOCIAL MEDIA STUDIO</footer>
+</main>
+</div>
+<script>
+let selectedPlatform = "TikTok";
+let currentDraft = null;
+let drafts = [];
+const topicEl = document.getElementById("topic");
+const detailsEl = document.getElementById("details");
+const output = document.getElementById("draftOutput");
+const statusEl = document.getElementById("status");
+document.querySelectorAll(".platform").forEach(button => button.addEventListener("click", () => {
+  document.querySelectorAll(".platform").forEach(b => b.classList.remove("selected"));
+  button.classList.add("selected"); selectedPlatform = button.dataset.platform;
+}));
+document.querySelectorAll(".navbtn").forEach(button => button.addEventListener("click", () => {
+  document.querySelectorAll(".navbtn").forEach(b => b.classList.remove("active"));
+  button.classList.add("active"); goTo(button.dataset.target);
+}));
+function goTo(id){ const el=document.getElementById(id); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); }
+document.getElementById("videoFile").addEventListener("change", event => {
+  const file=event.target.files[0]; document.getElementById("fileName").textContent=file ? "Selected: "+file.name : "No video selected";
+});
+function makeDraft(){
+  const topic=topicEl.value.trim() || "delicious catering moments";
+  const details=detailsEl.value.trim();
+  const caption=`Discover the taste of Zaiqa Habib Catering — ${topic}. ${details ? details+" " : ""}Fresh flavours, beautiful presentation and memorable moments for your special occasions. Follow for more delicious food and catering ideas.\n\n#ZaiqaHabib #Catering #FoodLovers #PakistaniFood #Foodie`;
+  currentDraft={platform:selectedPlatform,topic,caption,approved:false,saved:false};
+  output.textContent=`Platform: ${selectedPlatform}\n\nCaption:\n${caption}`;
+  statusEl.textContent="Draft created. Review it, then copy or save it; nothing has been uploaded.";
+  document.getElementById("approvalStatus").textContent="Draft is awaiting your review.";
+}
+document.getElementById("createDraft").addEventListener("click",makeDraft);
+document.getElementById("copyDraft").addEventListener("click",async()=>{
+  if(!currentDraft){statusEl.textContent="Create a draft first.";return;}
+  try{await navigator.clipboard.writeText(output.textContent);statusEl.textContent="Draft copied. Nothing has been published.";}
+  catch(e){statusEl.textContent="Clipboard access was blocked. Select the draft text and copy it manually.";}
+});
+document.getElementById("approveDraft").addEventListener("click",()=>{
+  if(!currentDraft){statusEl.textContent="Create a draft first. No draft is approved.";return;}
+  currentDraft.approved=true;
+  statusEl.textContent="You marked this draft approved. It is still NOT uploaded or published.";
+  document.getElementById("approvalStatus").textContent="Approved locally: "+currentDraft.topic+" — not published.";
+  renderDrafts();
+});
+document.getElementById("saveDraft").addEventListener("click",()=>{
+  if(!currentDraft){statusEl.textContent="Create a draft first.";return;}
+  if(!currentDraft.saved){drafts.unshift({...currentDraft,saved:true});currentDraft.saved=true;}
+  statusEl.textContent="Draft saved in this page session. It may disappear when you close or reload the page.";
+  renderDrafts();
+});
+function renderDrafts(){
+  const list=document.getElementById("draftList");
+  if(!drafts.length)return;
+  list.innerHTML=drafts.map(d=>`<div class="draft-row"><div class="draft-thumb">${d.platform==="TikTok"?"♪":d.platform==="YouTube"?"▶️":d.platform==="Instagram"?"📸":"f"}</div><div><strong>${escapeText(d.topic)}</strong><small>${escapeText(d.platform)} · saved in this session</small></div><span class="pill ${d.approved?"approved":""}">${d.approved?"Approved":"Draft"}</span></div>`).join("");
+}
+function escapeText(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+document.getElementById("viewAll").addEventListener("click",()=>{goTo("drafts");statusEl.textContent=drafts.length?`You have ${drafts.length} draft(s) saved in this page session.`:"No saved drafts yet. Create and save one first.";});
+</script>
 </body>
 </html>
